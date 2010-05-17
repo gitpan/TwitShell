@@ -1,0 +1,469 @@
+commit f75c1fbeda181142023d392f4a1a09d2299362a6
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 15:30:11 2010 +0200
+
+    add tests
+
+commit 7ab6e61d004d14f6fa694dd5299f933c82227a38
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 14:51:07 2010 +0200
+
+    add use strict + bug fix
+
+commit fdd4c9d0b56754130f3714184dbb8eff2daeaa41
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 14:48:45 2010 +0200
+
+    fix wrong password set bug
+
+commit dc791c28353fd74acf0ecb03f2ecd8a8939b9957
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 14:42:37 2010 +0200
+
+    make CLASS -> get_pwd() to directly set CLASS -> {'password'}
+
+commit 2c1ff29f33605a28e1bc128ec9e19ba37e439e77
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 14:39:16 2010 +0200
+
+    add documentation to modules
+
+commit dac164538d6a0a45e74062726253f9034b7aa008
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 21:01:34 2010 +0200
+
+    add Changes MANIFEST README
+
+commit 82588f7af098ed867afa05b64acffa22af368a35
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 20:50:44 2010 +0200
+
+    add POD documentation
+
+commit 722907914bd22c7f36dfc38eae3ac1e020e76367
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 18:45:09 2010 +0200
+
+    rename script to scripts
+
+commit 24d49ee25419afd6c14b39536a65619374c0bcea
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 18:43:08 2010 +0200
+
+    add TwitCurses
+
+commit 7e2eca8bb5ffea682a2fc8222c6630e7feb839d4
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 16:48:13 2010 +0200
+
+    add verify_credentials()
+
+commit 4a0812ffa5f212629b3b950a789dff1e618f3230
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 16:30:58 2010 +0200
+
+    fix undef user'name and screen_name
+
+commit 5ad3361c3568de175d3ad35f7bbd70532d9a07d4
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 16:19:23 2010 +0200
+
+    add App::TwitShell::Resources::Shorten
+
+commit 4a4bfd4a6794d08e96c94aced49c135f9f396322
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 15:45:26 2010 +0200
+
+    add url shortening using U.NU
+
+commit 90cafc5b6b9c034fba9738feeb7d533fe3c8e92e
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 15:18:41 2010 +0200
+
+    add relative_time() to App::TwitShell::Resources
+
+commit 7629e1d446777c8a9c767cbf13ddefc0c6c84aee
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 15:11:45 2010 +0200
+
+    add format output in TwitShell
+
+commit ebe957250a9b465bce2569a3770b23333a71e3cb
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat May 15 14:46:52 2010 +0200
+
+    add better hash parsing + error handling
+
+commit c17fcb66a1b85fc8e9b579740eb408ce7771fc76
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri May 14 22:09:58 2010 +0200
+
+    add use of format_post() in App::TwitShell::Resources::Send
+
+commit 0adad9c76e3b9037c716514803920c8f23cd8d23
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri May 14 22:09:03 2010 +0200
+
+    move format_post() to App::TwitShell::Resources
+
+commit c2de9cfdf29ea11226d97e9e1c5a988b596cb0fa
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri May 14 22:07:15 2010 +0200
+
+    add basic non-empty check on user input
+
+commit 8055222b2bc6f25caedc5af287f3bbb90c0765ea
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri May 14 21:59:07 2010 +0200
+
+    add format_post()
+
+commit d8d3618b14b88ef25b58c10dbf755cd3ef5aa609
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri May 14 21:45:56 2010 +0200
+
+    add minor changes
+
+commit bc7993f2badfc63b5331227acdc110b6badd59ed
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri May 14 20:16:37 2010 +0200
+
+    rewrite code fom scratch - first commit
+
+commit 0293058e913c5daecd3cff40a9c8143d224ac7d6
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu May 13 17:46:49 2010 +0200
+
+    update conf, doc, README and CHANGELOG
+
+commit dfcf20d6c90d46ef1f3bda7cbd66380f5a98dd76
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu May 13 17:36:28 2010 +0200
+
+    add auto-refresh
+
+commit 7c040c12aa1e7a85a471012989c37da9abeb752e
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed May 12 21:56:01 2010 +0200
+
+    add more code improvements
+
+commit 544fdc87202df62a297c58dfdc3471519c411c7c
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed May 12 21:13:42 2010 +0200
+
+    fix bug in arguments parsing + more code improvement
+
+commit 73e2786ef28e8d1ad5d0e2487bc460fce74d7ee4
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed May 12 21:00:06 2010 +0200
+
+    fix bug in credentials verification
+
+commit 72c400e16738dd54ecb2d5fb987a148d24e364d2
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed May 12 20:53:19 2010 +0200
+
+    improve code
+
+commit 638fb55748d215962354bc09f2574dfc825619f2
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri Apr 2 20:44:11 2010 +0200
+
+    inbox support
+
+commit bac69baf08c3da23ebf2169ccf0790369f9fbc52
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 20:16:49 2010 +0100
+
+    version 3.0
+
+commit 5cb0bb3164804ce6973f14bc44a334cfd03d8493
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 19:55:26 2010 +0100
+
+    multiple networks (identi.ca) support
+
+commit 642219b9dce5213675bd977ab26b416e0f29c7fa
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 19:26:29 2010 +0100
+
+    corrected wrong entry in POD
+
+commit 98ade0e99dc296c0705397decdc3a6bf6bde79e6
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 19:21:30 2010 +0100
+
+    corrected trunk CHANGELOG entry
+
+commit 98bfa6d03bf26e3ba85b2a1e79b5867afa912d84
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 19:10:55 2010 +0100
+
+    updated VERSION + CHANGELOG
+
+commit 78919845b3b5f076a6ead0393a75bb450f8086af
+Merge: 2eb3289 ed1cfc5
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 19:08:35 2010 +0100
+
+    Merge branch 'master' into dev
+
+commit 2eb32896425125b8ba86105b6ef62eb71ed3e61c
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 19:03:26 2010 +0100
+
+    fixed bug in relative time sub
+
+commit bad9cd93f2db44b9e9f2b676baeffa233a61353a
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 19:02:48 2010 +0100
+
+    improved code
+
+commit ef3a212f0fe433098f16046ac3ad0b855cdb4f97
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 18:53:54 2010 +0100
+
+    implemented new twitter api endpoint and versioning
+
+commit 8ea3a112e80fe9b4b6baed1ee6bb9e90d4036939
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 18:35:30 2010 +0100
+
+    added credentials check
+
+commit 5f3c54fe9d37bae09b376c08ddf331cad791d93b
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 23 17:24:00 2010 +0100
+
+    added configuration file
+
+commit ed1cfc5528261aa0b9d207e7c56cea0c26368118
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed Mar 10 17:03:10 2010 +0100
+
+    added twitter API test
+
+commit c9936120018a141c816635a87c7a867b555b9385
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 9 20:08:04 2010 +0100
+
+    updated tests
+
+commit e80433e32db5fda098f44b5ded41e4117cc228e1
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 9 19:57:19 2010 +0100
+
+    relative date + bufixes
+
+commit bdb10af432bd0c7f034f15305c5d59185da8b3fd
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Tue Mar 9 19:57:07 2010 +0100
+
+    relative date + bufixes
+
+commit 171916ca466146351d3934a4e313a80035ff85a5
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun Mar 7 18:30:39 2010 +0100
+
+    updated CHANGELOG
+
+commit c54abc15a8baecd828d5b7ff43c29fa0e5352d17
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sat Mar 6 20:32:23 2010 +0100
+
+    Version 2.2 - added Makefile + test
+
+commit cb70d3fb436ef2dfea53d3790e55df4ebc952381
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun Feb 21 16:43:00 2010 +0100
+
+    fix wrong updates listing
+
+commit b064d4ddc7a9a7394905bbc2d6ffb64bb171a3b2
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun Feb 21 16:35:37 2010 +0100
+
+    fix change page bug
+
+commit 00319e7b4644de39ce9688cd8ac66372254371d3
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Feb 18 21:07:44 2010 +0100
+
+    ehm.. yes other fixes
+
+commit 784827d7ccc3b4bb219009452405bbee18a71d1a
+Merge: 0a201b6 67e9b23
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Feb 18 20:42:15 2010 +0100
+
+    various bufixes
+
+commit 67e9b237a88395dde8ad40dd824bc7bff391b2c3
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Feb 18 20:24:21 2010 +0100
+
+    added sub auth_post_request()
+
+commit 5230354b3b25a51497c88a4f9a78a1b3fe615b1c
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Feb 18 20:10:03 2010 +0100
+
+    minor bugfixes
+
+commit cb892cabee6c652e10e04f4bd800fe32f4b4bc5f
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Feb 18 19:28:39 2010 +0100
+
+    Version 2.1
+
+commit a721b1d1c363687b2ef7fe6a412ed6a8781d9c77
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Feb 18 19:25:44 2010 +0100
+
+    code clean-up using strict
+
+commit 34a627c1481e4624ae14fdb4a28d109155648519
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Feb 18 18:36:31 2010 +0100
+
+    coding style clean-ups
+
+commit 28b3fa97644605418d914428e67d71c954566855
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Feb 18 18:26:33 2010 +0100
+
+    remove development code
+
+commit eae68b0d57ce773b87aedae88cfd1da1233423de
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed Feb 17 22:26:47 2010 +0100
+
+    auto shortening for 'update' and 'send' using Tr.im
+
+commit 0a201b6fa0f7fa802510d6158090f2731a37a569
+Author: Alessandro <al3xbio@gmail.com>
+Date:   Tue Feb 16 13:09:45 2010 -0700
+
+    fix update status
+
+commit 4b82dc748f43c6c2b6ac109b8e5bf9f16fa3f558
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Mon Feb 15 13:19:39 2010 +0100
+
+    README updated
+
+commit 9889b759f264232e1dfb86820dd74aaf0de754a5
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri Feb 12 21:23:01 2010 +0100
+
+    removed shorten()
+
+commit 29d5bda2d865fc3e9850f3bc671f597bb8ddedbe
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri Feb 12 19:54:55 2010 +0100
+
+    items disappearance fixed
+
+commit b56ad4f8a151832aed309de41e50b77aa40cf640
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri Feb 12 19:47:56 2010 +0100
+
+    removed backup files
+
+commit 9c1d142a217a05f998dc9d39b7a264c83fc02c19
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Fri Feb 12 19:45:39 2010 +0100
+
+    Version 2.0
+
+commit 1390357e48643a7f2d90b606c2c9c3e949c814aa
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed Feb 10 22:20:27 2010 +0100
+
+    experimental curses interface
+
+commit eb04f3706acd16e46cf4a233c16b1366f8afcd45
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed Feb 10 22:18:42 2010 +0100
+
+    new password request
+
+commit 2666e7545a6791a847fbf816fbe5be5433a2e869
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun Dec 27 20:33:02 2009 +0100
+
+    updated TODo and CHANGELOG to version 1.4
+
+commit 2cf3cde9244833ae937b20846d60bc4442fa3beb
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun Dec 27 20:30:47 2009 +0100
+
+    added user methods
+
+commit 1df9ec9e26381f7b7cd49b0d7cdd3166ad69b144
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Mon Dec 21 19:36:58 2009 +0100
+
+    embedded pod documentation
+
+commit bc22aadc0745a5d8759931a3bc69c168e91b6156
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sun Oct 18 20:43:10 2009 +0200
+
+    version 1.3
+
+commit 865358580cf718573ed133a2a8d67624dfff1c59
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Fri Sep 18 11:22:59 2009 -0700
+
+    -.-" stupid error
+
+commit b40bc815ef402e1d191bc14d8b97f3f2c2d15d50
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sun Sep 6 19:56:46 2009 +0200
+
+    Added TODO, minor bugfixes
+
+commit b61726e120a0c35e55909c21d9b2df42bb0e46f8
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sun Sep 6 18:41:06 2009 +0200
+
+    Version 1.2
+
+commit 04b62725e5eabb3badfcf8357f2492c0158f1cd6
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sun Sep 6 18:38:21 2009 +0200
+
+    Version 1.2
+
+commit 940549fce42b5880ff14caf0017ee1d6ec3731b0
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sun Aug 23 18:36:27 2009 +0200
+
+    minor updates
+
+commit 65e1221e2c591e6bde9c14177e7d6c142ed07670
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sun Aug 23 18:33:07 2009 +0200
+
+    minor updates
+
+commit 3ff8c3168fce9a9bde0e1c39715785299a80684a
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sat Aug 22 20:53:53 2009 +0200
+
+    README updated
+
+commit b4b6bfc3463a3f8e2aef1ae7c15e02b2fbe4ea95
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sat Aug 22 20:51:13 2009 +0200
+
+    README updated
+
+commit 57d18f128192773a9b6c72da066cc5259c8360b8
+Author: AlexBio <al3xbio@gmail.com>
+Date:   Sat Aug 22 20:47:40 2009 +0200
+
+    first commit

@@ -1,0 +1,17 @@
+Changes
+MANIFEST
+Makefile.PL
+README
+lib/App/TwitShell.pm
+lib/App/TwitShell/Resources.pm
+lib/App/TwitShell/Resources/Get.pm
+lib/App/TwitShell/Resources/Send.pm
+lib/App/TwitShell/Resources/Shorten.pm
+scripts/TwitShell
+scripts/TwitCurses
+t/00-load.t
+t/boilerplate.t
+t/manifest.t
+t/pod.t
+t/pod-coverage.t
+META.yml                                 Module meta-data (added by MakeMaker)

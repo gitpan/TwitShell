@@ -1,0 +1,289 @@
+#!/usr/bin/perl
+
+use App::TwitShell;
+use POSIX qw(ceil);
+use Time::Out qw(timeout) ;
+use Curses qw(!timeout);
+
+use strict;
+
+=head1 NAME
+
+TwitCurses - Command-line microblogging client with Curses interface.
+
+=head1 SYNOPSIS
+
+TwitCurses [OPTIONS]
+
+=head1 VERSION
+
+Version 4.06
+
+=cut
+
+our $VERSION = '4.06';
+
+my $client = App::TwitShell -> new();
+
+$client -> parse_config();
+$client -> parse_arguments();
+
+$client -> get_pwd();
+
+$client -> verify_credentials();
+
+my ($command, $section) = 'p';
+my ($index, $page) = 0;
+
+initscr;
+
+noecho;
+start_color;
+raw();
+keypad(1);
+
+init_pair(1, COLOR_BLACK, COLOR_BLUE);
+init_pair(2, COLOR_BLACK, COLOR_WHITE);
+
+while ($command ne 'q') {
+	my $max_items_per_page = ceil(($LINES - 2) / ((200/$COLS) + 1)) - 1;
+
+	my $cmdlist = "q:Quit  -  f:Friends  -  p:Profile  -  i:Inbox  -  o:Outbox";
+	
+	my $cmdlist_length = length($cmdlist);
+	
+	for (my $i = 0; $i < ($COLS - $cmdlist_length); $i++) {
+		$cmdlist .= " ";
+	}
+
+	my %commands = ('p'  => 'user',
+			'f'  => 'friends',
+			'i'   => 'inbox',
+			'o'   => 'outbox');
+
+	if (defined $commands{$command}) {
+		
+		$client -> {'action'} = $commands{$command};
+
+		print_cmd($cmdlist);
+		update_status("Loading data...\n");
+		refresh;
+
+		$client -> run();
+
+		my ($index, $page) = 0;
+	}
+	
+	my $items_count =  $#{$client -> {'posts'}};
+	
+	if (($command == KEY_DOWN) and (($index + $page*$max_items_per_page < $items_count) and
+	    ($index <= $max_items_per_page))) {
+		$index++;			
+		if ($index >= $max_items_per_page) {
+			$page++;
+			$index = 0;
+		}
+
+	} elsif (($command == KEY_UP) and (($index != 0) or ($page != 0))) {
+		if (($index <= 0) and ($page != 0)) {
+			$page--;
+			$index = $max_items_per_page - 1;
+		} else {
+			$index--;
+		}
+	}
+
+	erase;
+	
+	refresh;
+	
+	print_cmd($cmdlist);
+	
+	for (my $i = 0; ($i < $max_items_per_page) and
+			($i + 1 + $page * $max_items_per_page <= $items_count); $i++) {
+				
+		my $cur_post = $client -> {'posts'}[$i + $page * $max_items_per_page];
+
+		next if !(defined $cur_post);
+		
+		my $twit = $cur_post -> {'user'}." - ".$cur_post -> {'text'}.
+			   " (".$cur_post -> {'relative'}.")";
+
+		while (length($twit) % $COLS != 0) {
+			$twit .= " ";
+		}
+
+		attron(COLOR_PAIR(2)) if ($index == $i);
+		
+		printw("%s\n", $twit);
+		
+		attroff(COLOR_PAIR(1)) if ($index == $i);
+	}
+	
+	refresh;
+
+	
+	if ($client -> {'refresh'} == 1) {
+		timeout $client -> {'secs'} => sub {
+			$command = getch;
+		};
+		
+		$command = $section if $@;
+
+	} else {
+		$command = getch;
+	}
+
+	erase;
+
+	sub update_status {
+		my $status = shift;
+		printw $status;
+	}
+
+	sub print_cmd {
+		my $cmdlist = shift;
+	
+		attron(COLOR_PAIR(1));
+		printw("%s\n", $cmdlist);
+		attroff(COLOR_PAIR(1));
+	}
+}
+endwin;
+
+=head1 DESCRIPTION
+
+This is I<TwitCurses>, the interactive version of TwitShell.
+
+I<TwitShell> is a microblogging client that runs via the command-line. It
+supports many microblogging platform such as Twitter and Identi.ca.
+
+The main purpose of I<TwitShell> is to supply an simple tool to fetch
+user's posted data (statuses, direct messages, etc...) and post data (status
+update, direct messages) via a command-line interface.
+
+I<TwitShell> supports many microblogging features such as user timeline
+and friends timeline, direct messages (both sent and received), status
+update and direct messages dispatch.
+
+I<TwitShell>'s code is based on the specifications of Twitter API.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--username [USERNAME]>, B<--username=[USERNAME]>
+
+Specifies an account's username. It is used also for for authentication.
+This option is required for every action.
+
+=item B<--count [COUNT]>, B<--count=[COUNT]>
+
+Specifies the number of posts to retrieve and to show.
+
+=item B<--network [NETWORK]>, B<--network=[NETWORK]>
+
+Specifies the desired microblogging platform. Se section NETWORKS for more
+info. Default is I<twitter>.
+
+=item B<--refresh [0|1]>, B<--refresh=[0|1]>
+
+Automatic refresh trigger. If enabled (1), data will be automatically
+refreshed after SECS seconds. Can be used only in interactive mode
+(TwitCurses).
+
+=item B<--secs [SECS]>, B<--secs=[SECS]>
+
+Refresh timeout. It in seconds. Used with B<--refresh>.
+
+=back
+
+=head1 THE .twitshellrc FILE
+
+The F<.twitshell> file is read on TwitShell startup. In this file may be
+set the same options of OPTIONS section with the syntax
+C<variable = value>. A F<.twitshell> might look like this:
+
+	username = examplename
+	count = 35
+	shorten = 1
+
+This default values are overwritten by the command-line arguments.
+
+=head1 KEYS
+
+=over 4
+
+=item B<q>
+
+Quit TwitCurses.
+
+=item B<f>
+
+Friends timeline tab.
+
+=item B<p>
+
+Profile (personal timeline) tab.
+
+=item B<i>
+
+Inbox (received direct messages) tab.
+
+=item B<o>
+
+Outbox (sent direct messages) tab.
+
+=back
+
+=head1 NETWORKS
+
+=over 4
+
+=item B<twitter>
+
+Twitter.com (default value).
+
+=item B<identi.ca>
+
+Identi.ca
+
+=back
+
+=head1 AUTHOR
+
+Alessandro Ghedini, C<< <al3xbio at gmail.com> >>
+
+=head1 BUGS 
+
+Please report any bugs or feature requests to the issues list at Github:
+L<http://github.com/AlexBio/TwitShell/issues>
+
+=head1 SUPPORT
+
+Support and information about I<TwitShell> can be found at:
+
+=over 4
+
+=item TwitShell homepage
+
+L<http://alexlog.co.cc/projects/twitshell>
+
+=item Git repository
+
+L<http://github.com/AlexBio/TwitShell>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2010 Alessandro Ghedini.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See L<http://dev.perl.org/licenses/> for more information.
+
+=cut
+

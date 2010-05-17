@@ -1,0 +1,204 @@
+#!/usr/bin/perl
+
+use App::TwitShell;
+
+use strict;
+
+=head1 NAME
+
+TwitShell - Command-line microblogging client
+
+=head1 SYNOPSIS
+
+TwitShell --action ACTION [OPTIONS]
+
+=head1 VERSION
+
+Version 4.06
+
+=cut
+
+our $VERSION = '4.06';
+
+my $client = App::TwitShell -> new();
+
+$client -> parse_config();
+$client -> parse_arguments();
+
+if (($client -> {'action'} eq 'friends') or
+    ($client -> {'action'} eq 'inbox') 	 or
+    ($client -> {'action'} eq 'outbox')  or
+    ($client -> {'action'} eq 'update')  or
+    ($client -> {'action'} eq 'send')) {
+	    $client -> get_pwd();
+}
+
+$client -> run();
+
+foreach my $post(@{$client -> {'posts'}}) {
+	print $post -> {'user'}." - ".$post -> {'text'}." (".$post -> {'relative'}.")\n\n";
+}
+
+=head1 DESCRIPTION
+
+I<TwitShell> is a microblogging client that runs via the command-line. It
+supports many microblogging platform such as Twitter and Identi.ca.
+
+The main purpose of I<TwitShell> is to supply an simple tool to fetch
+user's posted data (statuses, direct messages, etc...) and post data (status
+update, direct messages) via a command-line interface.
+
+I<TwitShell> supports many microblogging features such as user timeline
+and friends timeline, direct messages (both sent and received), status
+update and direct messages dispatch.
+
+I<TwitShell>'s code is based on the specifications of Twitter API.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<--action [ACTION]>, B<--action=[ACTION]>
+
+Specifies which action that one wants to execute. See section ACTIONS for
+more info.
+
+=item B<--username [USERNAME]>, B<--username=[USERNAME]>
+
+Specifies an account's username. It is used also for for authentication.
+This option is required for every action.
+
+=item B<--count [COUNT]>, B<--count=[COUNT]>
+
+Specifies the number of posts to retrieve and to show.
+
+=item B<--id [ID]>, B<--id=[ID]>
+
+Specifies a single post's ID. It is used for B<single>.
+
+=item B<--network [NETWORK]>, B<--network=[NETWORK]>
+
+Specifies the desired microblogging platform. Se section NETWORKS for more
+info. Default is I<twitter>.
+
+=item B<--msg [MESSAGE]>, B<--msg=[MESSAGE]>
+
+Specifies the text of the status that'll be created. It is used for B<update>
+and B<send> actions.
+
+=item B<--shorten [0|1]>, B<--shorten=[0|1]>
+
+URL shortening trigger. If enabled (1), urls in MESSAGE will be automatically
+shortened. See section URL SHORTENING for more info.
+
+=item B<--recipient [RECIPIENT]>, B<--recipient=[RECIPIENT]>
+
+Specifies the recipient of a direct messages. It is used for B<send>.
+
+=back
+
+=head1 THE .twitshellrc FILE
+
+The F<.twitshell> file is read on TwitShell startup. In this file may be
+set the same options of OPTIONS section with the syntax
+C<variable = value>. A F<.twitshell> might look like this:
+
+	username = examplename
+	count = 35
+	shorten = 1
+
+This default values are overwritten by the command-line arguments.
+
+=head1 ACTIONS
+
+=over 4
+
+=item B<single>
+
+Retrieve a single status by its ID. Requires USERNAME and ID. 
+
+=item B<user>
+
+Retrieve the COUNT (default is 20) most recent statuses sent by USERNAME.
+
+=item B<friends>
+
+Retrieve the COUNT (default is 20) most recent statuses sent by USERNAME
+and USERNAME's friends. Requires authentication.
+
+=item B<inbox>
+
+Retrieve the COUNT (default is 20) most recent direct messages sent to
+USERNAME. Requires authentication.
+
+=item B<outbox>
+
+Retrieve the COUNT (default is 20) most recent direct messages sent by
+USERNAME. Requires authentication.
+
+=item B<update>
+
+Updates USERNAME's status. Requires MESSAGE and authentication.
+
+=item B<send>
+
+Send a direct Message to RECIPIENT. Requires, besides RECIPIENT, MESSAGE
+and authentication.
+
+=back
+
+=head1 NETWORKS
+
+=over 4
+
+=item B<twitter>
+
+Twitter.com (default value).
+
+=item B<identi.ca>
+
+Identi.ca
+
+=back
+
+=head1 URL SHORTENING
+
+TwitShell's shortening feature is based on U:NU online URL shortening
+service. See U.NU's terms of service at L<http://u.nu/unu-terms>
+
+=head1 AUTHOR
+
+Alessandro Ghedini, C<< <al3xbio at gmail.com> >>
+
+=head1 BUGS 
+
+Please report any bugs or feature requests to the issues list at Github:
+L<http://github.com/AlexBio/TwitShell/issues>
+
+=head1 SUPPORT
+
+Support and information about I<TwitShell> can be found at:
+
+=over 4
+
+=item TwitShell homepage
+
+L<http://alexlog.co.cc/projects/twitshell>
+
+=item Git repository
+
+L<http://github.com/AlexBio/TwitShell>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2010 Alessandro Ghedini.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See L<http://dev.perl.org/licenses/> for more information.
+
+=cut
