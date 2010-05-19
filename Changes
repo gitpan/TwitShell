@@ -1,3 +1,45 @@
+commit d9c4ad92c8d154a9ed8b740faca16298b7cf447c
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed May 19 18:50:50 2010 +0200
+
+    add user input check in network string
+
+commit 90badcc0f4e6157346f399abd87568b98379b762
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed May 19 18:43:07 2010 +0200
+
+    fix missing last item in TwitCurses queue bug
+
+commit 19065b8df411709049b8ea6a893996b2d82be741
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Wed May 19 18:31:11 2010 +0200
+
+    fix unsuccessful index and page zeroing on section change
+
+commit 6f1fc05909674feda775feb68a5141ba28da31d5
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 19:44:30 2010 +0200
+
+    reupload Makefile.PL
+
+commit 30cbbbb4bf4d7e654750cc85225d8583015bd932
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 19:42:54 2010 +0200
+
+    update  MANIFEST and Makefile.PL
+
+commit 56ddb3918b32a69efa3527101352ba48eb6ccd30
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 19:41:46 2010 +0200
+
+    remove .pl extension and make scripts executable
+
+commit eb4999ff8125ca8d11ee71a9082ed99a6ec42367
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Sun May 16 15:30:37 2010 +0200
+
+    update Changes
+
 commit f75c1fbeda181142023d392f4a1a09d2299362a6
 Author: Alessandro Ghedini <al3xbio@gmail.com>
 Date:   Sun May 16 15:30:11 2010 +0200

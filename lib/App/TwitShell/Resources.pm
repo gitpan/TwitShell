@@ -14,11 +14,11 @@ functions.
 
 =head1 VERSION
 
-Version 4.06
+Version 4.07
 
 =cut
 
-our $VERSION = 4.06;
+our $VERSION = 4.07;
 
 =head1 SYNOPSIS
 
@@ -124,6 +124,10 @@ sub get_api {
 	my ($self, $network) = @_;
 
 	my %api;
+
+	my @networks = ('twitter', 'identi.ca');
+
+	$network = 'twitter' unless (grep $_ eq $network, @networks);
 	
 	if ($network eq "twitter") {
 		$api{'endpoint'} = "api.twitter.com:80";

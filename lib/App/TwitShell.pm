@@ -14,11 +14,11 @@ App::TwitShell - Container for TwitShell objects's functions.
 
 =head1 VERSION
 
-Version 4.06
+Version 4.07
 
 =cut
 
-our $VERSION = 4.06;
+our $VERSION = 4.07;
 
 =head1 SYNOPSIS
 

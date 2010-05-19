@@ -17,11 +17,11 @@ TwitCurses [OPTIONS]
 
 =head1 VERSION
 
-Version 4.06
+Version 4.07
 
 =cut
 
-our $VERSION = '4.06';
+our $VERSION = '4.07';
 
 my $client = App::TwitShell -> new();
 
@@ -71,7 +71,7 @@ while ($command ne 'q') {
 
 		$client -> run();
 
-		my ($index, $page) = 0;
+		($index, $page) = 0;
 	}
 	
 	my $items_count =  $#{$client -> {'posts'}};
@@ -100,7 +100,7 @@ while ($command ne 'q') {
 	print_cmd($cmdlist);
 	
 	for (my $i = 0; ($i < $max_items_per_page) and
-			($i + 1 + $page * $max_items_per_page <= $items_count); $i++) {
+			($i + $page * $max_items_per_page <= $items_count); $i++) {
 				
 		my $cur_post = $client -> {'posts'}[$i + $page * $max_items_per_page];
 
