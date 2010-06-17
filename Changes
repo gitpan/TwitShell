@@ -1,20 +1,62 @@
-commit d9c4ad92c8d154a9ed8b740faca16298b7cf447c
+commit a70f2707e9d76a55dc1edf79d375c49719f411cb
 Author: Alessandro Ghedini <al3xbio@gmail.com>
-Date:   Wed May 19 18:50:50 2010 +0200
+Date:   Thu Jun 17 22:07:03 2010 +0200
 
-    add user input check in network string
+    fix version conflict with PAUSE
 
-commit 90badcc0f4e6157346f399abd87568b98379b762
+commit 769298311181a07e2a8a7534bd6e5fa0b287a3d2
 Author: Alessandro Ghedini <al3xbio@gmail.com>
-Date:   Wed May 19 18:43:07 2010 +0200
+Date:   Thu Jun 17 22:03:16 2010 +0200
 
-    fix missing last item in TwitCurses queue bug
+    add use warnings
 
-commit 19065b8df411709049b8ea6a893996b2d82be741
+commit 661c00010b143885f12d69a0f6ae69ab2e0ebb7c
 Author: Alessandro Ghedini <al3xbio@gmail.com>
-Date:   Wed May 19 18:31:11 2010 +0200
+Date:   Thu Jun 17 21:51:31 2010 +0200
 
-    fix unsuccessful index and page zeroing on section change
+    update README
+
+commit b3c01bec28d1d7c62f5f6a8abb7153e8d027bcc7
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Jun 17 21:49:37 2010 +0200
+
+    update Changes
+
+commit 62cefb0ec34e2abc31fe7290d1ff6fa4bfb4080f
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Jun 17 21:49:12 2010 +0200
+
+    new upstream release 4.07
+
+commit 82f5ebbaa9a45ea50abfe0f609de63e83df7f85e
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Jun 17 21:43:14 2010 +0200
+
+    fix bug in which caused TwitCurses to not show first last post
+
+commit fa7ce98b53b0efa0b9f113832b08bd8806e37aee
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Jun 17 21:39:24 2010 +0200
+
+    set friends timeline as default in TwitCurses
+
+commit 478d75d0f932d079d019ff5091ea4d68624e2e2b
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Jun 17 21:38:53 2010 +0200
+
+    add proper use of Perl OOP
+
+commit 6b52d9b82639c8378d356d1a2ba19e7a9bec4aaf
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Jun 17 20:02:54 2010 +0200
+
+    improve documentation style
+
+commit bbbeff0d9acdddbff31e28cf97ea0408ea0e4fed
+Author: Alessandro Ghedini <al3xbio@gmail.com>
+Date:   Thu Jun 17 19:56:11 2010 +0200
+
+    add proper use of bless
 
 commit 6f1fc05909674feda775feb68a5141ba28da31d5
 Author: Alessandro Ghedini <al3xbio@gmail.com>

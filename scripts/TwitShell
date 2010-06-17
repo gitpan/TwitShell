@@ -3,6 +3,7 @@
 use App::TwitShell;
 
 use strict;
+use warnings;
 
 =head1 NAME
 
@@ -14,23 +15,23 @@ TwitShell --action ACTION [OPTIONS]
 
 =head1 VERSION
 
-Version 4.07
+Version 4.08
 
 =cut
 
-our $VERSION = '4.07';
+our $VERSION = '4.08';
 
-my $client = App::TwitShell -> new();
+my $client = App::TwitShell -> new;
 
-$client -> parse_config();
-$client -> parse_arguments();
+$client -> parse_config;
+$client -> parse_arguments;
 
 if (($client -> {'action'} eq 'friends') or
     ($client -> {'action'} eq 'inbox') 	 or
     ($client -> {'action'} eq 'outbox')  or
     ($client -> {'action'} eq 'update')  or
     ($client -> {'action'} eq 'send')) {
-	    $client -> get_pwd();
+	    $client -> get_pwd;
 }
 
 $client -> run();
@@ -168,26 +169,47 @@ service. See U.NU's terms of service at L<http://u.nu/unu-terms>
 
 =head1 AUTHOR
 
-Alessandro Ghedini, C<< <al3xbio at gmail.com> >>
+Alessandro Ghedini, C<< <alexbio at cpan.org> >>
 
-=head1 BUGS 
+=head1 BUGS
 
-Please report any bugs or feature requests to the issues list at Github:
-L<http://github.com/AlexBio/TwitShell/issues>
+Please report any bugs or feature requests to C<bug-twitshell at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TwitShell>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
 
 =head1 SUPPORT
 
-Support and information about I<TwitShell> can be found at:
+You can find documentation for this module with the perldoc command.
+
+    perldoc TwitShell
+
+You can also look for information at:
 
 =over 4
 
-=item TwitShell homepage
+=item * TwitShell homepage
 
 L<http://alexlog.co.cc/projects/twitshell>
 
-=item Git repository
+=item * GitHub page
 
 L<http://github.com/AlexBio/TwitShell>
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=TwitShell>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/TwitShell>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/TwitShell>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/TwitShell/>
 
 =back
 
@@ -199,6 +221,10 @@ This program is free software; you can redistribute it and/or modify it
 under the terms of either: the GNU General Public License as published
 by the Free Software Foundation; or the Artistic License.
 
-See L<http://dev.perl.org/licenses/> for more information.
+See http://dev.perl.org/licenses/ for more information.
+
 
 =cut
+
+# End of TwitShell
+

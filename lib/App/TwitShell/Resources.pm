@@ -6,6 +6,11 @@ use JSON -support_by_pp;
 use DateTime::Format::HTTP;
 
 use strict;
+use warnings;
+use base 'Exporter';
+
+our @EXPORT = qw(get_api parse_response parse_post_hash 
+		 get_request auth_get_request auth_post_request);
 
 =head1 NAME
 
@@ -14,11 +19,11 @@ functions.
 
 =head1 VERSION
 
-Version 4.07
+Version 4.08
 
 =cut
 
-our $VERSION = 4.07;
+our $VERSION = 4.08;
 
 =head1 SYNOPSIS
 
@@ -34,7 +39,7 @@ Execute a simple GET request.
 =cut
 
 sub get_request {
-	my ($self, $url) = @_;
+	my $url = shift;
 	my $ua = LWP::UserAgent -> new;
 
 	my $response = $ua -> request(GET $url) -> as_string;
@@ -49,7 +54,7 @@ Execute a GET request with HTTP authorization.
 =cut
 
 sub auth_get_request {
-	my ($self, $url, $usr, $pwd, $api) = @_;
+	my ($url, $usr, $pwd, $api) = @_;
 	my $ua = LWP::UserAgent -> new;
 	
 	$ua -> credentials($api -> {'endpoint'}, $api -> {'realm'}, $usr, $pwd);
@@ -64,8 +69,8 @@ Execute a POST request with HTTP authorization.
 
 =cut
 
-sub auth_post_request() {
-	my ($self, $url, $usr, $pwd, $request, $api) = @_;
+sub auth_post_request {
+	my ($url, $usr, $pwd, $request, $api) = @_;
 	my $ua = LWP::UserAgent->new;
 
 	$ua -> credentials($api -> {'endpoint'}, $api -> {'realm'}, $usr, $pwd);
@@ -81,11 +86,14 @@ Parse a HTTP response splitting JSON data, and return a JSON object.
 =cut
 
 sub parse_response {
-	my $self = shift;
 	my @data = split('\n\n', shift);
 	
 	my $json = new JSON;
 	my $json_text = $json -> decode($data[1]);
+
+	if (ref $json_text ne "ARRAY") {
+		die("ERROR: ".$json_text -> {'error'}."\n") if $json_text -> {'error'};
+	}
 	
 	return $json_text;
 }
@@ -97,17 +105,17 @@ Parse a JSON object, and return an array of posts.
 =cut
 
 sub parse_post_hash {
-	my ($self, $data, $type) = @_;
+	my ($data, $type) = @_;
 
 	my @posts;
 	
 	if ($data =~ /array/i) {
 		foreach my $status(@{$data}) {
-			my $post = App::TwitShell::Resources -> format_post($status, $type);
+			my $post = format_post($status, $type);
 			push(@posts, $post);	
 		}
 	} else {
-		my $post = App::TwitShell::Resources -> format_post($data, $type);
+		my $post = format_post($data, $type);
 		push(@posts, $post);
 	}
 
@@ -121,13 +129,9 @@ Return an API hash based on selected network.
 =cut
 
 sub get_api {
-	my ($self, $network) = @_;
+	my $network = shift;
 
 	my %api;
-
-	my @networks = ('twitter', 'identi.ca');
-
-	$network = 'twitter' unless (grep $_ eq $network, @networks);
 	
 	if ($network eq "twitter") {
 		$api{'endpoint'} = "api.twitter.com:80";
@@ -151,13 +155,13 @@ Format a single post, from a hash, based on selected post type.
 =cut
 
 sub format_post {
-	my ($self, $status, $type) = @_;
+	my ($status, $type) = @_;
 
 	my %out;
 
-	if ((my $error = $status -> {error}) ne '') {
+	if ($status -> {'error'}) {
 		$out{'err'} = 1;
-		$out{'err_msg'} = $error;
+		$out{'err_msg'} = $status -> {error};
 	} else {
 		$out{'err'} = 0;
 		
@@ -212,4 +216,63 @@ sub relative_time {
 	}
 }
 
-1;
+=head1 AUTHOR
+
+Alessandro Ghedini, C<< <alexbio at cpan.org> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-twitshell at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TwitShell>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc App::TwitShell::Resources
+
+You can also look for information at:
+
+=over 4
+
+=item * TwitShell homepage
+
+L<http://alexlog.co.cc/projects/twitshell>
+
+=item * GitHub page
+
+L<http://github.com/AlexBio/TwitShell>
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=TwitShell>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/TwitShell>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/TwitShell>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/TwitShell/>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2010 Alessandro Ghedini.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
+
+=cut
+
+1; # End of App::TwitShell::Resources

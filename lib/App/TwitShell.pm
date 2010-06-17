@@ -7,6 +7,7 @@ use App::TwitShell::Resources::Send;
 use Getopt::Long;
 
 use strict;
+use warnings;
 
 =head1 NAME
 
@@ -14,11 +15,11 @@ App::TwitShell - Container for TwitShell objects's functions.
 
 =head1 VERSION
 
-Version 4.07
+Version 4.08
 
 =cut
 
-our $VERSION = 4.07;
+our $VERSION = 4.08;
 
 =head1 SYNOPSIS
 
@@ -27,7 +28,7 @@ client object.
 
 =head1 METHODS
 
-=head2 CLASS -> new()
+=head2 new()
 
 Create an instance of the Twitter client and assign some default values.
 
@@ -35,20 +36,18 @@ Create an instance of the Twitter client and assign some default values.
 
 sub new {
 	my ($class) = @_;
- 
-	my $self = bless({}, $class);
-
-	$self -> {'configfile'} = $ENV{'HOME'}.'/.twitshellrc';
-	$self -> {'count'}   	= 20;
-	$self -> {'network'} 	= 'twitter';
-	$self -> {'shorten'} 	= 0;
-	$self -> {'refresh'} 	= 0;
-	$self -> {'secs'}    	= 45;
-
+	
+	my $self = bless({configfile => $ENV{'HOME'}.'/.twitshellrc',
+			  count	     => 20,
+			  network    => 'twitter',
+			  shorten    => 0,
+			  refresh    => 0,
+			  secs       => 45
+			 }, $class);
 	return $self;
 }
 
-=head2 CLASS -> parse_config()
+=head2 parse_config()
 
 Parse the .twitshellrc file.
 
@@ -69,7 +68,7 @@ sub parse_config {
 	}
 }
 
-=head2 CLASS -> parse_arguments()
+=head2 parse_arguments()
 
 Parse the command-line arguments.
 
@@ -88,12 +87,13 @@ sub parse_arguments {
 			'refresh=i'  => \$self -> {'refresh'},
 			'secs=i'     => \$self -> {'username'},
 			'shorten=i'  => \$self -> {'username'},
+			'recipient=s'=> \$self -> {'recipient'}
 	);
 }
 
-=head2 CLASS -> run()
+=head2 run()
 
-Execute the action contant in CLASS -> {'action'}.
+Execute the action contant in 'action'.
 
 =cut
 
@@ -104,100 +104,58 @@ sub run {
 	error("Missing 'network'")  if $self -> {'network'}  eq '';
 	
 	if ($self -> {'action'} eq 'user') {
-		$self -> {'posts'} =
-			App::TwitShell::Resources::Get ->
-				get_user_posts($self -> {'username'},
-					       $self -> {'count'},
-					       $self -> {'network'}
-					      );
+		$self -> {'posts'} = get_user_posts($self);
 							       
 	} elsif ($self -> {'action'} eq 'friends') {
-		$self -> {'posts'} =
-			App::TwitShell::Resources::Get ->
-				get_friends_posts($self -> {'username'},
-						  $self -> {'password'},
-						  $self -> {'count'},
-						  $self -> {'network'}
-						 );
+		$self -> {'posts'} = get_friends_posts($self);
 
 	} elsif ($self -> {'action'} eq 'inbox') {
-		$self -> {'posts'} =
-			App::TwitShell::Resources::Get ->
-				get_inbox($self -> {'username'},
-					  $self -> {'password'},
-					  $self -> {'count'},
-					  $self -> {'network'}
-					 );
+		$self -> {'posts'} = get_inbox($self);
 
 	} elsif ($self -> {'action'} eq 'outbox') {
-		$self -> {'posts'} =
-			App::TwitShell::Resources::Get ->
-				get_outbox($self -> {'username'},
-					   $self -> {'password'},
-					   $self -> {'count'},
-					   $self -> {'network'}
-					  );
+		$self -> {'posts'} = get_outbox($self);
 
 	} elsif ($self -> {'action'} eq 'single') {
 		error("Missing 'id'") if $self -> {'id'} eq '';
 		
-		$self -> {'posts'} =
-			App::TwitShell::Resources::Get ->
-				get_single_post($self -> {'id'},
-						$self -> {'network'}
-					       );
+		$self -> {'posts'} = get_single_post($self);
 
 	} elsif ($self -> {'action'} eq 'update') {
 		error("Missing 'msg'") if $self -> {'msg'} eq '';
 		
-		$self -> {'posts'} =
-			App::TwitShell::Resources::Send ->
-				update($self -> {'username'},
-				       $self -> {'password'},
-				       $self -> {'msg'},
-				       $self -> {'shorten'},
-				       $self -> {'network'}
-				      );
+		$self -> {'posts'} = update($self);
+
 	} elsif ($self -> {'action'} eq 'send') {
 		error("Missing 'msg'")       if $self -> {'msg'}       eq '';
 		error("Missing 'recipient'") if $self -> {'recipient'} eq '';
 		
-		$self -> {'posts'} =
-			App::TwitShell::Resources::Send ->
-				send($self -> {'username'},
-				       $self -> {'password'},
-				       $self -> {'msg'},
-				       $self -> {'recipient'},
-				       $self -> {'shorten'},
-				       $self -> {'network'}
-				      );
+		$self -> {'posts'} = send_dm($self);
 	}
 }
 
-=head2 CLASS -> verify_credentials()
+=head2 verify_credentials()
 
-Verify the user's credentials via the web APIs, using CLASS -> {'username'}
-and CLASS -> {'password'}.
+Verify the user's credentials via the web APIs, using 'username'
+and 'password'.
 
 =cut
 
 sub verify_credentials {
 	my $self = shift;
 
-	my $api = App::TwitShell::Resources -> get_api($self -> {'network'});
+	my $api = get_api($self -> {'network'});
 
 	my $url 	= $api -> {'url'}."/account/verify_credentials.json";
-	my $response 	= App::TwitShell::Resources ->
-		auth_get_request($url, $self -> {'username'}, $self -> {'password'}, $api);
+	my $response 	= auth_get_request($url, $self -> {'username'}, $self -> {'password'}, $api);
 	
-	my $json_text 	= App::TwitShell::Resources -> parse_response($response);
+	my $json_text 	= parse_response($response);
 
 	my $error 	= $json_text -> {error};
 
 	error("$error") if ($error ne '');
 }
 
-=head2 CLASS -> get_pwd()
+=head2 get_pwd()
 
 Request user's password.
 
@@ -215,9 +173,9 @@ sub get_pwd {
 	$self -> {'password'} = $pwd;
 }
 
-=head2 CLASS -> error()
+=head2 error( $msg )
 
-Print formatted errors and die().
+Print formatted errors and die
 
 =cut
 
@@ -227,4 +185,77 @@ sub error {
 	die "ERROR: $msg\n";
 }
 
-1;
+=head2 get_data()
+
+Return content of a TwitShell object
+
+=cut
+
+sub get_data {
+	my $self = shift;
+
+	my %data = %$self;
+
+	return \%data;
+}
+
+=head1 AUTHOR
+
+Alessandro Ghedini, C<< <alexbio at cpan.org> >>
+
+=head1 BUGS
+
+Please report any bugs or feature requests to C<bug-twitshell at rt.cpan.org>, or through
+the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=TwitShell>.  I will be notified, and then you'll
+automatically be notified of progress on your bug as I make changes.
+
+=head1 SUPPORT
+
+You can find documentation for this module with the perldoc command.
+
+    perldoc App::TwitShell
+
+You can also look for information at:
+
+=over 4
+
+=item * TwitShell homepage
+
+L<http://alexlog.co.cc/projects/twitshell>
+
+=item * GitHub page
+
+L<http://github.com/AlexBio/TwitShell>
+
+=item * RT: CPAN's request tracker
+
+L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=TwitShell>
+
+=item * AnnoCPAN: Annotated CPAN documentation
+
+L<http://annocpan.org/dist/TwitShell>
+
+=item * CPAN Ratings
+
+L<http://cpanratings.perl.org/d/TwitShell>
+
+=item * Search CPAN
+
+L<http://search.cpan.org/dist/TwitShell/>
+
+=back
+
+=head1 LICENSE AND COPYRIGHT
+
+Copyright 2010 Alessandro Ghedini.
+
+This program is free software; you can redistribute it and/or modify it
+under the terms of either: the GNU General Public License as published
+by the Free Software Foundation; or the Artistic License.
+
+See http://dev.perl.org/licenses/ for more information.
+
+
+=cut
+
+1; # End of App::TwitShell
