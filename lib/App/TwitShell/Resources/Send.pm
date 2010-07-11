@@ -16,11 +16,11 @@ interface).
 
 =head1 VERSION
 
-Version 4.08
+Version 4.09
 
 =cut
 
-our $VERSION = 4.08;
+our $VERSION = 4.09;
 
 =head1 SYNOPSIS
 
@@ -56,7 +56,7 @@ sub update {
 	return $posts;
 }
 
-=head2 send_dm( $username, $password, $msg, $recipient, $shorten, $network )
+=head2 send_dm( $client )
 
 Send a direct message from authenticating user.
 

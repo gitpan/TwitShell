@@ -15,11 +15,11 @@ App::TwitShell - Container for TwitShell objects's functions.
 
 =head1 VERSION
 
-Version 4.08
+Version 4.09
 
 =cut
 
-our $VERSION = 4.08;
+our $VERSION = 4.09;
 
 =head1 SYNOPSIS
 
@@ -56,7 +56,7 @@ Parse the .twitshellrc file.
 sub parse_config {
 	my $self = shift;
 
-	open(CONFIG, $self -> {'configfile'}) or error ("$!");
+	open(CONFIG, $self -> {'configfile'}) or error("$!");
 	while (<CONFIG>) {
 		chomp;                  # no newline
 		s/#.*//;                # no comments
@@ -152,7 +152,7 @@ sub verify_credentials {
 
 	my $error 	= $json_text -> {error};
 
-	error("$error") if ($error ne '');
+	error("$error") if ($error);
 }
 
 =head2 get_pwd()

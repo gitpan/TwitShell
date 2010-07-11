@@ -16,11 +16,11 @@ interface).
 
 =head1 VERSION
 
-Version 4.08
+Version 4.09
 
 =cut
 
-our $VERSION = 4.08;
+our $VERSION = 4.09;
 
 =head1 SYNOPSIS
 
@@ -29,7 +29,7 @@ retrieving.
 
 =head1 FUNCTIONS
 
-=head2 get_single_post( $id, $network )
+=head2 get_single_post( $client )
 
 Retrieve a single post.
 
@@ -51,7 +51,7 @@ sub get_single_post {
 	return $posts;
 }
 
-=head2 get_user_posts( $id, $screen_name, $count, $network )
+=head2 get_user_posts( $client )
 
 Retrieve given user's post (user_timeline).
 
@@ -63,7 +63,7 @@ sub get_user_posts {
 
 	my $api = get_api($data -> {'network'});
 
-	my $options = "screen_name=".$data -> {'screen_name'}."&count=".$data -> {'count'};
+	my $options = "screen_name=".$data -> {'username'}."&count=".$data -> {'count'};
 	my $url = $api -> {'url'}."/statuses/user_timeline.json";
 	
 	my $response  = get_request("$url?$options");
@@ -74,7 +74,7 @@ sub get_user_posts {
 	return $posts;
 }
 
-=head2 get_friends_posts( $username, $password, $count, $network )
+=head2 get_friends_posts( $client )
 
 Retrieve given user's friends post (friends_timeline). Require authentication.
 
@@ -98,7 +98,7 @@ sub get_friends_posts {
 	return $posts;
 }
 
-=head2 get_inbox( $username, $password, $count, $network )
+=head2 get_inbox( $client )
 
 Retrieve given user's received direct messages (direct_messages). Require authentication.
 
@@ -122,7 +122,7 @@ sub get_inbox {
 	return $posts;
 }
 
-=head2 get_outbox( $username, $password, $count, $network )
+=head2 get_outbox( $client )
 
 Retrieve given user's sent direct messages (direct_messages/sent).
 Require authentication.

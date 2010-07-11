@@ -6,7 +6,7 @@ use Time::Out qw(timeout) ;
 use Curses qw(!timeout);
 
 use strict;
-use warnings;
+#use warnings;
 
 =head1 NAME
 
@@ -18,11 +18,11 @@ TwitCurses [OPTIONS]
 
 =head1 VERSION
 
-Version 4.08
+Version 4.09
 
 =cut
 
-our $VERSION = '4.08';
+our $VERSION = '4.09';
 
 my $client = App::TwitShell -> new;
 
@@ -33,8 +33,10 @@ $client -> get_pwd;
 
 $client -> verify_credentials;
 
-my ($command, $section) = 'f';
-my ($index, $page) = 0;
+my ($command, $section, $index, $page);
+
+$command = $section = 'f';
+$index = $page = 0;
 
 initscr;
 

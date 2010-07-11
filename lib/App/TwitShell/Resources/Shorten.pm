@@ -14,11 +14,11 @@ App::TwitShell::Resources::Shorten - Container for URL shortening functions.
 
 =head1 VERSION
 
-Version 4.08
+Version 4.09
 
 =cut
 
-our $VERSION = 4.08;
+our $VERSION = 4.09;
 
 =head1 SYNOPSIS
 

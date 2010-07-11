@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               TwitShell
-version:            4.08
+version:            4.09
 abstract:           Command-line microblogging client.
 author:
     - Alessandro Ghedini <al3xbio@gmail.com>
