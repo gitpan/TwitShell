@@ -2,7 +2,7 @@ package App::TwitShell::Resources;
 
 use HTTP::Request::Common;
 use LWP::UserAgent;
-use JSON -support_by_pp;
+use JSON;
 use DateTime::Format::HTTP;
 
 use strict;
@@ -19,11 +19,11 @@ functions.
 
 =head1 VERSION
 
-Version 4.09
+Version 4.10
 
 =cut
 
-our $VERSION = 4.09;
+our $VERSION = 4.10;
 
 =head1 SYNOPSIS
 

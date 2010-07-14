@@ -18,11 +18,11 @@ TwitCurses [OPTIONS]
 
 =head1 VERSION
 
-Version 4.09
+Version 4.10
 
 =cut
 
-our $VERSION = '4.09';
+our $VERSION = '4.10';
 
 my $client = App::TwitShell -> new;
 
